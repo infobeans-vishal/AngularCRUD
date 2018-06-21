@@ -1,0 +1,80 @@
+
+
+<input class="requestParam" type="text" (keyup)="onNameKeyUp($event)" placeholder="Enter input here">
+<button (click)="getData()">Get Data</button>
+<button (click)="postData()">Post Data</button>
+<div class ="createdCeus" *ngIf="isPostData">
+  <h3>Submit Ceus</h3>
+   <form #myForm="ngForm" (ngSubmit)="register(myForm)">
+   <div>
+      <label>Ceu Id</label>
+      <input type="text" name="ceuId" ngModel required />
+   </div>
+   <div>
+      <label>Activity Type Id</label>
+      <input type="text" name="activityTypeId" ngModel required />
+   </div>
+   <div>
+      <label>Ceu Role</label>
+      <input type="text" name="ceuRole" ngModel required />
+   </div>
+   <div>
+      <label>Activity Name</label>
+      <input type="text" name="activityName" ngModel required />
+   </div>
+   <div>
+      <label>Provider Name</label>
+      <input type="text" name="providerName" ngModel required/>
+   </div>
+   <div>
+      <label>Activity Date </label>
+      <input type="text" name="activityDate" ngModel required id="activityDate"/>
+   </div>
+   <div>
+      <label>Activity Quantity </label>
+      <input type="text" name="activityQuantity" ngModel required/>
+   </div>
+   <div>
+      <label>Ceus Remained </label>
+      <input type="text" name="ceusRemained" ngModel required/>
+   </div>
+   <div>
+      <label>Created By </label>
+      <input type="text" name="createdBy" ngModel required/>
+   </div>
+   <button type="submit">Register</button>
+   
+   </form>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+</div>
+<span *ngIf="result">{{result}}"</span>
+<!-- //Block execute when request comes for ceus list -->
+<table *ngIf="found && isCount == 'list'">
+   <th>Activity Option</th>
+   <th>Activity Name</th>
+   <th>Activity Provider</th>
+   <th>Activity Date</th>
+   <th>Activity Quantity</th>
+   <th>Ceus Earned</th>
+   <th>Action</th>
+   <tr *ngFor="let acitivity of certificationTypes">
+      <td>{{acitivity.activity_name}}</td>
+      <td>{{acitivity.activity_name}}</td>
+      <td>{{acitivity.provider_name}}</td>
+      <td>{{acitivity.created_date}}</td>
+      <td>{{acitivity.activity_quantity}}</td>
+      <td>{{acitivity.ceus_earned}}</td>
+      <td>
+         <button (click)='deleteCeus(acitivity.ceu_id)'>Delete</button>
+      </td>
+   </tr>
+</table>
+
+<!-- //Block execute when request comes for ceus count -->
+<div *ngIf="found && isCount == 'count'">
+        <ul *ngFor="let acitivity of certificationTypes.response.candidateceucount">
+        <li> <b>Uri</b> :{{certificationTypes.response.uri}} </li>
+        <li> <b>Available_ceu</b> : {{acitivity.available_ceu}} </li>
+        <li> <b>Inside_ceus</b> : {{acitivity.inside_ceus}} </li>
+      </ul>
+</div>
+
